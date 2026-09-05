@@ -4,7 +4,12 @@ import { FlowTable } from '@/components/flowos'
 
 export default function HomePage() {
   const [showCreate, setShowCreate] = useState(false)
-  const [values, setValues] = useState({ title: '', description: '', priority: 'medium', status: 'new' })
+  const [values, setValues] = useState({
+    title: '',
+    description: '',
+    priority: 'medium',
+    status: 'new',
+  })
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [refreshKey, setRefreshKey] = useState(0)
@@ -17,7 +22,7 @@ export default function HomePage() {
       await flow.create('incidents', values)
       setValues({ title: '', description: '', priority: 'medium', status: 'new' })
       setShowCreate(false)
-      setRefreshKey(k => k + 1)
+      setRefreshKey((k) => k + 1)
     } catch (err) {
       setError(err.message || 'Failed to create incident')
     } finally {
@@ -31,10 +36,12 @@ export default function HomePage() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-2xl font-bold text-[#f4f4f5]">Incidents</h1>
-            <p className="text-sm text-[#71717a] mt-1">Live list bound to the built-in incidents table.</p>
+            <p className="text-sm text-[#71717a] mt-1">
+              Live list bound to the built-in incidents table.
+            </p>
           </div>
           <button
-            onClick={() => setShowCreate(v => !v)}
+            onClick={() => setShowCreate((v) => !v)}
             className="rounded-lg px-4 py-2 text-sm font-semibold text-white"
             style={{ background: 'linear-gradient(135deg, #6d28d9, #8b5cf6)' }}
           >
@@ -43,12 +50,16 @@ export default function HomePage() {
         </div>
 
         {showCreate && (
-          <form onSubmit={handleCreate} className="rounded-xl border border-[#26232f] p-5 mb-6 space-y-3" style={{ background: '#121019' }}>
+          <form
+            onSubmit={handleCreate}
+            className="rounded-xl border border-[#26232f] p-5 mb-6 space-y-3"
+            style={{ background: '#121019' }}
+          >
             <div>
               <label className="block text-xs font-medium text-[#a1a1aa] mb-1">Title</label>
               <input
                 value={values.title}
-                onChange={e => setValues(v => ({ ...v, title: e.target.value }))}
+                onChange={(e) => setValues((v) => ({ ...v, title: e.target.value }))}
                 required
                 className="w-full h-9 rounded-lg border border-[#26232f] bg-[#0c0b12] px-3 text-sm text-[#f4f4f5] focus:outline-none focus:border-[#7c3aed]/60"
               />
@@ -57,7 +68,7 @@ export default function HomePage() {
               <label className="block text-xs font-medium text-[#a1a1aa] mb-1">Description</label>
               <textarea
                 value={values.description}
-                onChange={e => setValues(v => ({ ...v, description: e.target.value }))}
+                onChange={(e) => setValues((v) => ({ ...v, description: e.target.value }))}
                 rows={3}
                 className="w-full rounded-lg border border-[#26232f] bg-[#0c0b12] px-3 py-2 text-sm text-[#f4f4f5] focus:outline-none focus:border-[#7c3aed]/60 resize-none"
               />
@@ -67,7 +78,7 @@ export default function HomePage() {
                 <label className="block text-xs font-medium text-[#a1a1aa] mb-1">Priority</label>
                 <select
                   value={values.priority}
-                  onChange={e => setValues(v => ({ ...v, priority: e.target.value }))}
+                  onChange={(e) => setValues((v) => ({ ...v, priority: e.target.value }))}
                   className="w-full h-9 rounded-lg border border-[#26232f] bg-[#0c0b12] px-3 text-sm text-[#f4f4f5] focus:outline-none focus:border-[#7c3aed]/60"
                 >
                   <option value="critical">Critical</option>
@@ -80,7 +91,7 @@ export default function HomePage() {
                 <label className="block text-xs font-medium text-[#a1a1aa] mb-1">Status</label>
                 <select
                   value={values.status}
-                  onChange={e => setValues(v => ({ ...v, status: e.target.value }))}
+                  onChange={(e) => setValues((v) => ({ ...v, status: e.target.value }))}
                   className="w-full h-9 rounded-lg border border-[#26232f] bg-[#0c0b12] px-3 text-sm text-[#f4f4f5] focus:outline-none focus:border-[#7c3aed]/60"
                 >
                   <option value="new">New</option>
@@ -102,7 +113,13 @@ export default function HomePage() {
           </form>
         )}
 
-        <FlowTable key={refreshKey} table="incidents" title="All Incidents" searchable pageSize={10} />
+        <FlowTable
+          key={refreshKey}
+          table="incidents"
+          title="All Incidents"
+          searchable
+          pageSize={10}
+        />
       </div>
     </div>
   )

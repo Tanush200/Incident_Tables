@@ -30,7 +30,7 @@ export default function HomePage() {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-[#f4f4f5]">Incidents</h1>
+            <h1 className="text-2xl font-bold text-[#f4f4f5]">Tanush - Incident Records</h1>
             <p className="text-sm text-[#71717a] mt-1">Live list bound to the built-in incidents table.</p>
           </div>
           <button
